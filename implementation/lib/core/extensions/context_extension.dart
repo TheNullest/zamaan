@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+
+/// Extension on BuildContext to provide convenient access to common properties and methods.
+///
+/// This extension adds several utility getters to the `BuildContext` class, making it easier
+/// to access common properties such as theme, media query, and user information.
+extension ContextExt on BuildContext {
+  /// Retrieves the current ThemeData from the context.
+  ///
+  /// This getter provides easy access to the current theme data, which can be used to
+  /// style widgets according to the app's theme.
+  ThemeData get theme => Theme.of(this);
+
+  /// Retrieves the current MediaQueryData from the context.
+  ///
+  /// This getter provides access to the media query data, which contains information
+  /// about the size and orientation of the screen, as well as other display properties.
+  MediaQueryData get mediaQuery => MediaQuery.of(this);
+
+  /// Retrieves the size of the current media query.
+  ///
+  /// This getter returns the size of the screen, which can be useful for responsive
+  /// layout calculations.
+  Size get size => mediaQuery.size;
+
+  /// Retrieves the width of the current media query.
+  ///
+  /// This getter returns the width of the screen, which can be useful for responsive
+  /// layout calculations.
+  double get mediaQueryWidth => size.width;
+
+  /// Retrieves the height of the current media query.
+  ///
+  /// This getter returns the height of the screen, which can be useful for responsive
+  /// layout calculations.
+  double get mediaQueryHeight => size.height;
+}
