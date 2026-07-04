@@ -32,6 +32,7 @@ class ScheduleConstraintsEntity extends BaseOwnedEntity {
     this.startDate,
     this.endDate,
     super.updatedAt,
+    super.order,
   });
 
   /// Named constructor for creating a new schedule constraints entity.
@@ -47,6 +48,7 @@ class ScheduleConstraintsEntity extends BaseOwnedEntity {
     super.description,
     this.startDate,
     this.endDate,
+    super.order,
   }) : super.create();
 
   /// Named constructor for updating an existing schedule constraints entity.
@@ -63,6 +65,7 @@ class ScheduleConstraintsEntity extends BaseOwnedEntity {
     required this.exceptionWeekDays,
     required this.exceptionMonthDays,
     super.description,
+    super.order,
     this.startDate,
     this.endDate,
   }) : super.update();
@@ -81,6 +84,7 @@ class ScheduleConstraintsEntity extends BaseOwnedEntity {
     String? description,
     DateTime? startDate,
     DateTime? endDate,
+    int? order,
   }) {
     return ScheduleConstraintsEntity.update(
       id: old.id,
@@ -94,6 +98,7 @@ class ScheduleConstraintsEntity extends BaseOwnedEntity {
       description: description ?? old.description,
       startDate: startDate ?? old.startDate,
       endDate: endDate ?? old.endDate,
+      order: order ?? old.order,
     );
   }
 
@@ -130,6 +135,7 @@ class ScheduleConstraintsEntity extends BaseOwnedEntity {
     List<WeekDay>? exceptionWeekDays,
     List<int>? exceptionMonthDays,
     bool? enforceScheduleBounds,
+    int? order,
   }) {
     return ScheduleConstraintsEntity(
       id: id ?? this.id,
@@ -144,6 +150,7 @@ class ScheduleConstraintsEntity extends BaseOwnedEntity {
       exceptionWeekDays: exceptionWeekDays ?? List.from(this.exceptionWeekDays),
       exceptionMonthDays: exceptionMonthDays ?? List.from(this.exceptionMonthDays),
       enforceScheduleBounds: enforceScheduleBounds ?? this.enforceScheduleBounds,
+      order: order ?? this.order,
     );
   }
 

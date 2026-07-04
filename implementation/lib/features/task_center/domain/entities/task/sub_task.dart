@@ -40,6 +40,7 @@ class SubTaskEntity extends BaseOwnedEntity {
     required this.totalSpentTime,
     super.description,
     super.updatedAt,
+    super.order,
   });
 
   /// Named constructor for creating a new subtask.
@@ -53,6 +54,7 @@ class SubTaskEntity extends BaseOwnedEntity {
     required this.status,
     required this.totalSpentTime,
     super.description,
+    super.order,
   }) : super.create();
 
   /// Named constructor for updating an existing subtask.
@@ -69,6 +71,7 @@ class SubTaskEntity extends BaseOwnedEntity {
     required this.status,
     required this.totalSpentTime,
     super.description,
+    super.order,
   }) : super.update();
 
   //========================
@@ -86,6 +89,7 @@ class SubTaskEntity extends BaseOwnedEntity {
     required TaskStatus status,
     required Duration totalSpentTime,
     String? description,
+    int? order,
   }) => SubTaskEntity.create(
     userId: userId,
     taskId: taskId,
@@ -94,6 +98,7 @@ class SubTaskEntity extends BaseOwnedEntity {
     status: status,
     totalSpentTime: totalSpentTime,
     description: description,
+    order: order,
   );
 
   /// Factory to create an updated subtask entity from input data.
@@ -105,6 +110,7 @@ class SubTaskEntity extends BaseOwnedEntity {
     required String title,
     required TaskStatus status,
     String? description,
+    int? order,
   }) => SubTaskEntity.update(
     id: old.id,
     userId: old.userId,
@@ -115,6 +121,7 @@ class SubTaskEntity extends BaseOwnedEntity {
     title: title,
     status: status,
     description: description,
+    order: order,
   );
 
   /// The ID of the parent task this subtask belongs to.
@@ -160,6 +167,7 @@ class SubTaskEntity extends BaseOwnedEntity {
     String? title,
     Priority? priority,
     TaskStatus? status,
+    int? order,
   }) => SubTaskEntity(
     id: id ?? this.id,
     updatedAt: updatedAt ?? this.updatedAt,
@@ -171,6 +179,7 @@ class SubTaskEntity extends BaseOwnedEntity {
     priority: priority ?? this.priority,
     status: status ?? this.status,
     totalSpentTime: totalSpentTime ?? this.totalSpentTime,
+    order: order ?? this.order,
   );
 
   @override

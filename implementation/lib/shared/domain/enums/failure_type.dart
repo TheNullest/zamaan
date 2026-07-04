@@ -7,5 +7,5 @@ enum FailureType {
   authentication,
   unexpected;
 
-  String get name => toString().substring(9).toSentenceCase();
+  String get name => toString().split('.').last.toSentenceCase();
 }

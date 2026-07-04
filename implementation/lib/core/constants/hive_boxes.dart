@@ -1,40 +1,20 @@
-import 'package:hive_ce_flutter/hive_flutter.dart';
-
-abstract class HiveBoxConstants {
-  HiveBoxConstants._();
-  static const String remoteSessionsBox = 'remoteSessionsBox';
-  static const String usersBox = 'usersBox';
-  static const String devicesBox = 'devicesBox';
-  static const String logsBox = 'logsBox';
-  static const String syncLogsBox = 'syncLogsBox';
-  static const String tasksBox = 'tasksBox';
-  static const String subTasksBox = 'subTasksBox';
-  static const String goalsBox = 'goalsBox';
-  static const String categoriesBox = 'categoriesBox';
-  static const String customMeasurementUnitsBox = 'customMeasurementUnitsBox';
-  static const String scheduleConstraintsBox = 'scheduleConstraintsBox';
-  static const String scheduledDayTimesBox = 'scheduledDayTimesBox';
-  static const String scheduledIntervalsBox = 'scheduledIntervalsBox';
-  static const String scheduledOccurrencesBox = 'scheduledOccurrencesBox';
-  static const String dateRangesBox = 'dateRangesBox';
-  static const String timeRangesBox = 'timeRangesBox';
-  static const String tagsBox = 'tagsBox';
-  static const String taskActivitysBox = 'taskActivitysBox';
-}
-
-enum HiveBox {
-  users(HiveBoxConstants.usersBox),
-  mainTasks(HiveBoxConstants.tasksBox),
-  subTasksBox(HiveBoxConstants.subTasksBox),
-  goalsBox(HiveBoxConstants.goalsBox),
-  categoriesBox(HiveBoxConstants.categoriesBox),
-  customeCustomeMeasurementUnitsBox(HiveBoxConstants.customMeasurementUnitsBox),
-  scheduleConstraintssBox(HiveBoxConstants.scheduleConstraintsBox),
-  tagsBox(HiveBoxConstants.tagsBox),
-  taskActivitysBox(HiveBoxConstants.taskActivitysBox);
-
-  const HiveBox(this.name);
-  final String name;
-
-  Future<Box> open() async => Hive.openBox<Type>(name);
+abstract class HiveBoxNames {
+  HiveBoxNames._();
+  static const String tasks = 'tasks';
+  static const String subTasks = 'subTasks';
+  static const String goals = 'goals';
+  static const String categories = 'categories';
+  static const String tags = 'tags';
+  static const String users = 'users';
+  static const String devices = 'devices';
+  static const String logs = 'logs';
+  static const String syncLogs = 'syncLogs';
+  static const String customMeasurementUnits = 'customMeasurementUnits';
+  static const String scheduleConstraints = 'scheduleConstraints';
+  static const String scheduledDayTimes = 'scheduledDayTimes';
+  static const String scheduledIntervals = 'scheduledIntervals';
+  static const String scheduledOccurrences = 'scheduledOccurrences';
+  static const String dateRanges = 'dateRanges';
+  static const String timeRanges = 'timeRanges';
+  static const String taskActivities = 'taskActivities';
 }

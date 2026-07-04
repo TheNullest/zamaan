@@ -1,4 +1,4 @@
-import 'package:zamaan/core/base/base_owned_entity.dart';
+import 'package:zamaan/shared/domain/entities/base_owned_entity.dart';
 import 'package:zamaan/shared/domain/enums/hive/goal_constraint.dart';
 import 'package:zamaan/shared/domain/enums/hive/measurement_unit.dart';
 import 'package:zamaan/shared/domain/enums/hive/reference_type.dart';
@@ -66,6 +66,7 @@ class GoalEntity extends BaseOwnedEntity {
     super.description,
     super.updatedAt,
     this.goalTargets = const {},
+    super.order,
   });
 
   /// Named constructor for creating a new goal.
@@ -80,6 +81,7 @@ class GoalEntity extends BaseOwnedEntity {
     this.customMeasurementUnitId,
     super.description,
     this.goalTargets = const {},
+    super.order,
   }) : super.create();
 
   /// Named constructor for updating an existing goal.
@@ -96,6 +98,7 @@ class GoalEntity extends BaseOwnedEntity {
     this.customMeasurementUnitId,
     super.description,
     this.goalTargets = const {},
+    super.order,
   }) : super.update();
 
   //========================
@@ -114,6 +117,7 @@ class GoalEntity extends BaseOwnedEntity {
     String? customMeasurementUnitId,
     String? description,
     Map<RepetitionType, dynamic>? goalTargets,
+    int? order,
   }) => GoalEntity.create(
     userId: userId,
     refType: refType,
@@ -123,6 +127,7 @@ class GoalEntity extends BaseOwnedEntity {
     customMeasurementUnitId: customMeasurementUnitId,
     description: description,
     goalTargets: goalTargets ?? const {},
+    order: order,
   );
 
   /// Factory to create an updated GoalEntity from input data.
@@ -133,6 +138,7 @@ class GoalEntity extends BaseOwnedEntity {
     String? customMeasurementUnitId,
     String? description,
     Map<RepetitionType, dynamic> goalTargets = const {},
+    int? order,
   }) => GoalEntity._update(
     id: oldGoal.id,
     userId: oldGoal.userId,
@@ -144,6 +150,7 @@ class GoalEntity extends BaseOwnedEntity {
     customMeasurementUnitId: customMeasurementUnitId,
     description: description,
     goalTargets: goalTargets,
+    order: order,
   );
 
   /// Creates a complete goal configuration.
@@ -207,6 +214,7 @@ class GoalEntity extends BaseOwnedEntity {
     String? customMeasurementUnitId,
     GoalConstraint? goalConstraint,
     Map<RepetitionType, dynamic>? goalTargets,
+    int? order,
   }) => GoalEntity(
     id: id ?? this.id,
     createdAt: createdAt ?? this.createdAt,
@@ -219,6 +227,7 @@ class GoalEntity extends BaseOwnedEntity {
     customMeasurementUnitId: customMeasurementUnitId ?? this.customMeasurementUnitId,
     goalConstraint: goalConstraint ?? this.goalConstraint,
     goalTargets: goalTargets ?? this.goalTargets,
+    order: order ?? this.order,
   );
 
   @override

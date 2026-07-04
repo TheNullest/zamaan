@@ -1,98 +1,118 @@
-import 'dart:developer';
-import 'dart:io';
+// lib/core/hive/hive_initializer.dart
 
+// --- Model adapters (from your original list) ---
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
-import 'package:zamaan/core/platform/directory_wrapper.dart';
-import 'package:zamaan/core/platform/path_provider_wrapper.dart';
-import 'package:zamaan/core/platform/platform_wrapper.dart';
-import 'package:zamaan/core/services/hive/hive_wrapper.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:zamaan/core/constants/hive_boxes.dart';
+import 'package:zamaan/features/task_center/data/models/local/category_hive_model.dart';
+import 'package:zamaan/features/task_center/data/models/local/goal_hive_model.dart';
+import 'package:zamaan/features/task_center/data/models/local/custom_measurement_unit_hive_model.dart';
+import 'package:zamaan/features/task_center/data/models/local/schedule/date_range_hive_model.dart';
+import 'package:zamaan/features/task_center/data/models/local/schedule/schedule_constraints_hive_model.dart';
+import 'package:zamaan/features/task_center/data/models/local/schedule/scheduled_day_time_hive_model.dart';
+import 'package:zamaan/features/task_center/data/models/local/schedule/scheduled_interval_hive_model.dart';
+import 'package:zamaan/features/task_center/data/models/local/schedule/scheduled_occurrence_hive_model.dart';
+import 'package:zamaan/features/task_center/data/models/local/schedule/time_range_hive_model.dart';
 
-abstract class HiveInitializer {
-  HiveInitializer({
-    required this.hive,
-    required this.platform,
-    required this.pathProvider,
-    required this.directory,
-  });
+import 'package:zamaan/features/task_center/data/models/local/tag_hive_model.dart';
+import 'package:zamaan/features/task_center/data/models/local/task/sub_task_hive_model.dart';
+import 'package:zamaan/features/task_center/data/models/local/task/task_hive_model.dart';
+import 'package:zamaan/shared/data/models/local/user/user_hive_model.dart';
+import 'package:zamaan/shared/domain/enums/enums.dart';
+// Uncomment when TaskActivity is ready:
+// import 'package:zamaan/features/task_center/data/models/local/task_activity_hive_model.dart';
+// import 'package:zamaan/features/sync/data/models/sync_log_hive_model.dart';
 
-  final HiveWrapper hive;
-  final PlatformWrapper platform;
-  final PathProviderWrapper pathProvider;
-  final DirectoryWrapper directory;
+/// Centralised Hive initialisation.
+/// Registers all adapters and opens all boxes.
+class HiveInitializer {
+  /// Call this once at app startup.
+  /// Provide an [encryptionCipher] only if you need encrypted boxes.
+  static Future<void> init({HiveCipher? encryptionCipher}) async {
+    final appDir = await getApplicationDocumentsDirectory();
+    Hive.init(appDir.path);
 
-  Future<void> init();
-}
+    _registerAdapters();
+    await _openAllBoxes(encryptionCipher);
+  }
 
-class HiveInitializerImpl extends HiveInitializer {
-  HiveInitializerImpl({
-    required super.hive,
-    required super.platform,
-    required super.pathProvider,
-    required super.directory,
-  });
+  static void _registerAdapters() {
+    // ---------- Model adapters ----------
+    Hive.registerAdapter(UserHiveModelAdapter());
+    Hive.registerAdapter(TaskHiveModelAdapter());
+    Hive.registerAdapter(SubTaskHiveModelAdapter());
+    Hive.registerAdapter(CategoryHiveModelAdapter());
+    Hive.registerAdapter(GoalHiveModelAdapter());
+    Hive.registerAdapter(CustomMeasurementUnitHiveModelAdapter());
+    Hive.registerAdapter(ScheduleConstraintsHiveModelAdapter());
+    Hive.registerAdapter(ScheduledDayTimeHiveModelAdapter());
+    Hive.registerAdapter(ScheduledIntervalHiveModelAdapter());
+    Hive.registerAdapter(ScheduledOccurrenceHiveModelAdapter());
+    Hive.registerAdapter(DateRangeHiveModelAdapter());
+    Hive.registerAdapter(TimeRangeHiveModelAdapter());
+    Hive.registerAdapter(TagHiveModelAdapter());
 
-  /// Initializes Hive by setting the document directory and registering
-  /// all required adapters.
-  @override
-  Future<void> init() async {
-    if (platform.isWindows) {
-      directory.directory = Directory(r'E:\Flutter.Dart\HiveFiles\Zamaan');
-    } else {
-      try {
-        directory.directory = await pathProvider.getAppDocDirectory();
-      } on Exception catch (e) {
-        log(e.toString(), name: 'HiveInitializerImpl.init');
-      }
-    }
-    if (!directory.existsSync()) {
-      await directory.create(recursive: true);
-    }
-    await hive.initFlutter(directory.path);
+    // Optional (uncomment when ready):
+    // Hive.registerAdapter(TaskActivityHiveModelAdapter());
+    // Hive.registerAdapter(SyncLogHiveModelAdapter());
 
-    final modelAdapters = <TypeAdapter>[
-      TaskHiveModelAdapter(),
-      RemoteSessionHiveModelAdapter(),
-      UserHiveModelAdapter(),
-      CategoryHiveModelAdapter(),
-      GoalHiveModelAdapter(),
-      CustomMeasurementUnitHiveModelAdapter(),
-      ScheduleConstraintsHiveModelAdapter(),
-      ScheduledDayTimeHiveModelAdapter(),
-      ScheduledIntervalHiveModelAdapter(),
-      ScheduledOccurrenceHiveModelAdapter(),
-      DateRangeHiveModelAdapter(),
-      TimeRangeHiveModelAdapter(),
-      SubTaskHiveModelAdapter(),
-      TagHiveModelAdapter(),
-      TaskActivityHiveModelAdapter(),
-      LogHiveModelAdapter(),
-      // SyncLogHiveModelAdapter(),
-      DeviceHiveModelAdapter(),
-    ];
+    // ---------- Enum adapters ----------
+    Hive.registerAdapter(DayTypeAdapter());
+    Hive.registerAdapter(GoalConstraintAdapter());
+    Hive.registerAdapter(IntervalUnitAdapter());
+    Hive.registerAdapter(MeasurementCategoryAdapter());
+    Hive.registerAdapter(MeasurementUnitAdapter());
+    Hive.registerAdapter(OSAdapter());
+    Hive.registerAdapter(PriorityAdapter());
+    Hive.registerAdapter(ReferenceTypeAdapter());
+    Hive.registerAdapter(RepetitionTypeAdapter());
+    Hive.registerAdapter(ScheduleTypeAdapter());
+    Hive.registerAdapter(SyncActionAdapter());
+    Hive.registerAdapter(TaskStatusAdapter());
+    Hive.registerAdapter(OccurrenceStatusAdapter());
+    Hive.registerAdapter(WeekDayAdapter());
+    Hive.registerAdapter(ScheduledTimeModeAdapter());
 
-    final enumAdapters = <TypeAdapter>[
-      DayTypeAdapter(),
-      GoalConstraintAdapter(),
-      IntervalUnitAdapter(),
-      MeasurementCategoryAdapter(),
-      MeasurementUnitAdapter(),
-      OSAdapter(),
-      PriorityAdapter(),
-      ReferenceTypeAdapter(),
-      RepetitionTypeAdapter(),
-      ScheduleTypeAdapter(),
-      SyncActionAdapter(),
-      TaskStatusAdapter(),
-      OccurrenceStatusAdapter(),
-      WeekDayAdapter(),
-      ScheduledTimeModeAdapter(),
-    ];
+    // ---------- Dart core type adapters ----------
+    // Hive.registerAdapter(DurationAdapter());
+  }
 
-    final dartClassAdapters = <TypeAdapter>[DurationAdapter()];
+  static Future<void> _openAllBoxes(HiveCipher? cipher) async {
+    // Open each box using the corresponding HiveBoxNames constant.
+    // All boxes are opened with the correct model type.
+    await Hive.openBox<UserHiveModel>(HiveBoxNames.users, encryptionCipher: cipher);
+    await Hive.openBox<TaskHiveModel>(HiveBoxNames.tasks, encryptionCipher: cipher);
+    await Hive.openBox<SubTaskHiveModel>(HiveBoxNames.subTasks, encryptionCipher: cipher);
+    await Hive.openBox<CategoryHiveModel>(HiveBoxNames.categories, encryptionCipher: cipher);
+    await Hive.openBox<GoalHiveModel>(HiveBoxNames.goals, encryptionCipher: cipher);
+    await Hive.openBox<CustomMeasurementUnitHiveModel>(
+      HiveBoxNames.customMeasurementUnits,
+      encryptionCipher: cipher,
+    );
+    await Hive.openBox<ScheduleConstraintsHiveModel>(
+      HiveBoxNames.scheduleConstraints,
+      encryptionCipher: cipher,
+    );
+    await Hive.openBox<ScheduledDayTimeHiveModel>(
+      HiveBoxNames.scheduledDayTimes,
+      encryptionCipher: cipher,
+    );
+    await Hive.openBox<ScheduledIntervalHiveModel>(
+      HiveBoxNames.scheduledIntervals,
+      encryptionCipher: cipher,
+    );
+    await Hive.openBox<ScheduledOccurrenceHiveModel>(
+      HiveBoxNames.scheduledOccurrences,
+      encryptionCipher: cipher,
+    );
+    await Hive.openBox<DateRangeHiveModel>(HiveBoxNames.dateRanges, encryptionCipher: cipher);
+    await Hive.openBox<TimeRangeHiveModel>(HiveBoxNames.timeRanges, encryptionCipher: cipher);
+    await Hive.openBox<TagHiveModel>(HiveBoxNames.tags, encryptionCipher: cipher);
 
-    final adapters = enumAdapters + dartClassAdapters + modelAdapters;
-    for (final adapter in adapters) {
-      Hive.registerAdapter(adapter);
-    }
+    // Optional boxes (uncomment when needed):
+    // await Hive.openBox<TaskActivityHiveModel>(HiveBoxNames.taskActivities, encryptionCipher: cipher);
+    // await Hive.openBox<SyncLogHiveModel>(HiveBoxNames.syncLogs, encryptionCipher: cipher);
+    // await Hive.openBox<DeviceHiveModel>(HiveBoxNames.devices, encryptionCipher: cipher);
+    // await Hive.openBox<LogHiveModel>(HiveBoxNames.logs, encryptionCipher: cipher);
   }
 }

@@ -43,6 +43,7 @@ class TaskEntity extends BaseOwnedEntity {
     required this.taskStatus,
     super.description,
     super.updatedAt,
+    super.order,
   });
 
   /// Named constructor for creating a new entity.
@@ -60,6 +61,7 @@ class TaskEntity extends BaseOwnedEntity {
     required this.taskStatus,
     super.description,
     this.totalSpentTime = Duration.zero,
+    super.order,
   }) : super.create();
 
   /// Named constructor for updating an existing entity.
@@ -80,6 +82,7 @@ class TaskEntity extends BaseOwnedEntity {
     required this.archived,
     required this.taskStatus,
     super.description,
+    super.order,
   }) : super.update();
 
   //========================
@@ -97,6 +100,7 @@ class TaskEntity extends BaseOwnedEntity {
     bool? archived,
     TaskStatus? taskStatus,
     String? description,
+    int? order,
   }) {
     return TaskEntity.update(
       id: old.id,
@@ -112,6 +116,7 @@ class TaskEntity extends BaseOwnedEntity {
       archived: archived ?? old.archived,
       taskStatus: taskStatus ?? old.taskStatus,
       description: description ?? old.description,
+      order: order ?? old.order,
     );
   }
 
@@ -205,7 +210,8 @@ class TaskEntity extends BaseOwnedEntity {
     bool? archived,
     List<String>? fixedTagIds,
     Duration? totalSpentTime,
-    TaskStatus? occurrenceStatus,
+    TaskStatus? taskStatus,
+    int? order,
   }) => TaskEntity(
     id: id ?? this.id,
     updatedAt: updatedAt ?? this.updatedAt,
@@ -220,7 +226,8 @@ class TaskEntity extends BaseOwnedEntity {
     archived: archived ?? this.archived,
     fixedTagIds: fixedTagIds ?? List.from(this.fixedTagIds),
     totalSpentTime: totalSpentTime ?? this.totalSpentTime,
-    taskStatus: occurrenceStatus ?? taskStatus,
+    taskStatus: taskStatus ?? this.taskStatus,
+    order: order ?? this.order,
   );
 
   @override

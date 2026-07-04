@@ -1,5 +1,5 @@
 import 'package:hive_ce_flutter/hive_flutter.dart';
-import 'package:zamaan/core/base/base_owned_entity.dart';
+import 'package:zamaan/shared/domain/entities/base_owned_entity.dart';
 
 /// Represents a generic category for organizing application entities (tasks, notes, etc.),
 /// with visual customization capabilities.
@@ -142,6 +142,7 @@ class CategoryEntity extends BaseOwnedEntity {
     String? title,
     int? colorCode,
     int? iconCode,
+    int? order,
   }) => CategoryEntity(
     id: id ?? this.id,
     description: description ?? this.description,
@@ -151,6 +152,7 @@ class CategoryEntity extends BaseOwnedEntity {
     title: title ?? this.title,
     colorCode: colorCode ?? this.colorCode,
     iconCode: iconCode ?? this.iconCode,
+    order: order ?? this.order,
   );
 
   @override

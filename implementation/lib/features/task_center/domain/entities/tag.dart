@@ -1,7 +1,6 @@
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:zamaan/features/task_center/domain/entities/category.dart';
 
-
 /// A specialized category used for labeling and organizing tasks with visual markers.
 ///
 /// Extends [CategoryEntity] to add tag-specific functionality while maintaining
@@ -26,9 +25,9 @@ import 'package:zamaan/features/task_center/domain/entities/category.dart';
 /// - Typically associated with [TaskEntity] through [TaskEntity.fixedTagIds]
 /// - Inherits all properties from [CategoryEntity]
 class TagEntity extends CategoryEntity {
-//========================
-// Constructors
-//========================
+  //========================
+  // Constructors
+  //========================
 
   /// Base constructor for fully initialized entity.
   TagEntity({
@@ -73,9 +72,9 @@ class TagEntity extends CategoryEntity {
     super.order,
   }) : super.update();
 
-//========================
-// Factories
-//========================
+  //========================
+  // Factories
+  //========================
 
   /// Factory to create a new TagEntity from input data.
   factory TagEntity.createFromData({
@@ -85,15 +84,16 @@ class TagEntity extends CategoryEntity {
     required int colorCode,
     required int iconCode,
     String? description,
-  }) =>
-      TagEntity.create(
-        userId: userId,
-        taskId: taskId,
-        title: title,
-        colorCode: colorCode,
-        iconCode: iconCode,
-        description: description,
-      );
+    int? order,
+  }) => TagEntity.create(
+    userId: userId,
+    taskId: taskId,
+    title: title,
+    colorCode: colorCode,
+    iconCode: iconCode,
+    description: description,
+    order: order,
+  );
 
   /// Factory to create an updated TagEntity from input data.
   factory TagEntity.updateFromData({
@@ -131,16 +131,17 @@ class TagEntity extends CategoryEntity {
     String? title,
     int? colorCode,
     int? iconCode,
-  }) =>
-      TagEntity(
-        id: id ?? this.id,
-        taskId: taskId ?? this.taskId,
-        description: description ?? this.description,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-        userId: userId ?? this.userId,
-        title: title ?? this.title,
-        colorCode: colorCode ?? this.colorCode,
-        iconCode: iconCode ?? this.iconCode,
-      );
+    int? order,
+  }) => TagEntity(
+    id: id ?? this.id,
+    taskId: taskId ?? this.taskId,
+    description: description ?? this.description,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    userId: userId ?? this.userId,
+    title: title ?? this.title,
+    colorCode: colorCode ?? this.colorCode,
+    iconCode: iconCode ?? this.iconCode,
+    order: order ?? this.order,
+  );
 }

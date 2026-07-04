@@ -95,6 +95,7 @@ class ScheduledDayTimeEntity extends BaseOwnedEntity {
     required this.startTime,
     required this.endTime,
     super.description,
+    super.order,
   }) : super.create();
 
   /// Named constructor for updating an existing entity.
@@ -133,6 +134,7 @@ class ScheduledDayTimeEntity extends BaseOwnedEntity {
     required int startTime,
     required int endTime,
     String? description,
+    int? order,
   }) => ScheduledDayTimeEntity.create(
     userId: userId,
     taskId: taskId,
@@ -143,6 +145,7 @@ class ScheduledDayTimeEntity extends BaseOwnedEntity {
     description: description,
     startTime: startTime,
     endTime: endTime,
+    order: order,
   );
 
   /// Factory to create an updated ScheduledDayTimeEntity from input data.
@@ -158,6 +161,7 @@ class ScheduledDayTimeEntity extends BaseOwnedEntity {
     required int startTime,
     required int endTime,
     String? description,
+    int? order,
   }) => ScheduledDayTimeEntity.update(
     id: id,
     userId: userId,
@@ -170,6 +174,7 @@ class ScheduledDayTimeEntity extends BaseOwnedEntity {
     startTime: startTime,
     endTime: endTime,
     description: description,
+    order: order,
   );
 
   /// Reference to the parent schedule definition.
@@ -214,6 +219,7 @@ class ScheduledDayTimeEntity extends BaseOwnedEntity {
     int? startDate,
     int? endDate,
     ScheduledTimeMode? timeMode,
+    int? order,
   }) {
     return ScheduledDayTimeEntity(
       id: id ?? this.id,
@@ -228,6 +234,7 @@ class ScheduledDayTimeEntity extends BaseOwnedEntity {
       repeatCount: repeatCount ?? this.repeatCount,
       startTime: startDate ?? startTime,
       endTime: endDate ?? endTime,
+      order: order ?? this.order,
     );
   }
 

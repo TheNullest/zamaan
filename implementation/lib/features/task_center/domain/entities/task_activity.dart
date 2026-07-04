@@ -71,6 +71,7 @@ class TaskActivityEntity extends BaseOwnedEntity {
     this.schedulerType,
     super.description,
     super.updatedAt,
+    super.order,
   });
 
   /// Named constructor for creating a new entity.
@@ -87,6 +88,7 @@ class TaskActivityEntity extends BaseOwnedEntity {
     this.schedulerId,
     this.schedulerType,
     super.description,
+    super.order,
   }) : super.create();
 
   /// Named constructor for updating an existing entity.
@@ -106,6 +108,7 @@ class TaskActivityEntity extends BaseOwnedEntity {
     this.schedulerId,
     this.schedulerType,
     super.description,
+    super.order,
   }) : super.update();
 
   //========================
@@ -124,6 +127,7 @@ class TaskActivityEntity extends BaseOwnedEntity {
     String? schedulerId,
     ScheduleType? schedulerType,
     String? description,
+    int? order,
   }) => TaskActivityEntity.create(
     userId: userId,
     referenceId: referenceId,
@@ -135,6 +139,7 @@ class TaskActivityEntity extends BaseOwnedEntity {
     schedulerId: schedulerId,
     schedulerType: schedulerType,
     description: description,
+    order: order,
   );
 
   /// Factory to create an updated TaskActivityEntity from input data.
@@ -151,6 +156,7 @@ class TaskActivityEntity extends BaseOwnedEntity {
     String? schedulerId,
     ScheduleType? schedulerType,
     String? description,
+    int? order,
   }) => TaskActivityEntity.update(
     id: id,
     userId: userId,
@@ -164,6 +170,7 @@ class TaskActivityEntity extends BaseOwnedEntity {
     schedulerId: schedulerId,
     schedulerType: schedulerType,
     description: description,
+    order: order,
   );
 
   /// The ID of the associated task or subtask.
@@ -221,6 +228,7 @@ class TaskActivityEntity extends BaseOwnedEntity {
     String? schedulerId,
     List<String>? variableTagIds,
     TaskStatus? occurrenceStatus,
+    int? order,
   }) => TaskActivityEntity(
     id: id ?? this.id,
     updatedAt: updatedAt ?? this.updatedAt,
@@ -235,6 +243,7 @@ class TaskActivityEntity extends BaseOwnedEntity {
     taskStatus: occurrenceStatus ?? taskStatus,
     schedulerId: schedulerId ?? this.schedulerId,
     schedulerType: schedulerType ?? this.schedulerType,
+    order: order ?? this.order,
   );
 
   /// Properties used by `equatable` to compare instances.

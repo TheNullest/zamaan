@@ -56,6 +56,7 @@ abstract class EnumHiveTypeIds {
   static const int weekDay = 123;
   static const int occurrenceStatus = 124;
   static const int scheduledTimeMode = 125;
+  static const int registrationStatus = 126;
 }
 
 /// Identifiers for Primitive Wrappers and Dart Native Types (Range: 181+).

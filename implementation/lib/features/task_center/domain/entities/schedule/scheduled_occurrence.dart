@@ -67,6 +67,7 @@ class ScheduledOccurrenceEntity extends BaseOwnedEntity {
     required this.timeMode,
     super.description, // Multi-purpose: exceptions, notes, cancellation reasons
     super.updatedAt,
+    super.order,
     this.successPercentage = 0,
     this.timezone = 'UTC',
   });
@@ -85,6 +86,7 @@ class ScheduledOccurrenceEntity extends BaseOwnedEntity {
     required this.sequenceNumber,
     required this.timeMode,
     super.description,
+    super.order,
     this.successPercentage = 0,
     this.timezone = 'UTC',
   }) : super.create();
@@ -106,6 +108,7 @@ class ScheduledOccurrenceEntity extends BaseOwnedEntity {
     required this.sequenceNumber,
     required this.timeMode,
     super.description,
+    super.order,
     this.successPercentage = 0,
     this.timezone = 'UTC',
   }) : super.update();
@@ -130,6 +133,7 @@ class ScheduledOccurrenceEntity extends BaseOwnedEntity {
     String? description,
     int successPercentage = 0,
     String timezone = 'UTC',
+    int? order,
   }) => ScheduledOccurrenceEntity.create(
     userId: userId,
     taskId: taskId,
@@ -143,6 +147,7 @@ class ScheduledOccurrenceEntity extends BaseOwnedEntity {
     description: description,
     successPercentage: successPercentage,
     timezone: timezone,
+    order: order,
   );
 
   /// Factory to create an updated ScheduledOccurrenceEntity from input data.
@@ -161,6 +166,7 @@ class ScheduledOccurrenceEntity extends BaseOwnedEntity {
     String? description,
     int successPercentage = 0,
     String timezone = 'UTC',
+    int? order,
   }) => ScheduledOccurrenceEntity.update(
     id: id,
     userId: userId,
@@ -176,6 +182,7 @@ class ScheduledOccurrenceEntity extends BaseOwnedEntity {
     description: description,
     successPercentage: successPercentage,
     timezone: timezone,
+    order: order,
   );
 
   /// The exact date and time when this scheduled occurrence is scheduled to begin.
@@ -295,6 +302,7 @@ class ScheduledOccurrenceEntity extends BaseOwnedEntity {
     int? sequenceNumber,
     int? successPercentage,
     String? timezone,
+    int? order,
   }) {
     return ScheduledOccurrenceEntity(
       id: id ?? this.id,
@@ -312,6 +320,7 @@ class ScheduledOccurrenceEntity extends BaseOwnedEntity {
       timeMode: timeMode ?? this.timeMode,
       timezone: timezone ?? this.timezone,
       taskId: taskId ?? this.taskId,
+      order: order ?? this.order,
     );
   }
 

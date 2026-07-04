@@ -1,5 +1,5 @@
 import 'package:hive_ce_flutter/hive_flutter.dart';
-import 'package:zamaan/core/base/base_owned_entity.dart';
+import 'package:zamaan/shared/domain/entities/base_owned_entity.dart';
 
 /// Represents a measurement unit used within the application for quantifying values.
 ///
@@ -46,6 +46,7 @@ class CustomMeasurementUnitEntity extends BaseOwnedEntity {
     required this.isDouble,
     required this.iconCode,
     super.updatedAt,
+    super.order,
   });
 
   /// Named constructor for creating a new measurement unit.
@@ -58,6 +59,7 @@ class CustomMeasurementUnitEntity extends BaseOwnedEntity {
     required this.isDouble,
     required this.iconCode,
     super.description,
+    super.order,
   }) : super.create();
 
   /// Named constructor for updating an existing measurement unit.
@@ -71,6 +73,7 @@ class CustomMeasurementUnitEntity extends BaseOwnedEntity {
     required this.isDouble,
     required this.iconCode,
     super.description,
+    super.order,
   }) : super.update();
 
   //========================
@@ -86,12 +89,14 @@ class CustomMeasurementUnitEntity extends BaseOwnedEntity {
     required bool isDouble,
     required int iconCode,
     String? description,
+    int? order,
   }) => CustomMeasurementUnitEntity.create(
     userId: userId,
     title: title,
     isDouble: isDouble,
     iconCode: iconCode,
     description: description,
+    order: order,
   );
 
   /// Factory to create an updated CustomMeasurementUnitEntity from input data.
@@ -103,6 +108,7 @@ class CustomMeasurementUnitEntity extends BaseOwnedEntity {
     required bool isDouble,
     required int iconCode,
     String? description,
+    int? order,
   }) => CustomMeasurementUnitEntity.update(
     id: id,
     userId: userId,
@@ -111,6 +117,7 @@ class CustomMeasurementUnitEntity extends BaseOwnedEntity {
     isDouble: isDouble,
     iconCode: iconCode,
     description: description,
+    order: order,
   );
 
   /// A human-readable title for the measurement unit.
@@ -134,6 +141,7 @@ class CustomMeasurementUnitEntity extends BaseOwnedEntity {
     String? description,
     int? iconCode,
     bool? isDouble,
+    int? order,
   }) => CustomMeasurementUnitEntity(
     id: id ?? this.id,
     createdAt: createdAt ?? this.createdAt,
@@ -143,6 +151,7 @@ class CustomMeasurementUnitEntity extends BaseOwnedEntity {
     description: description ?? this.description,
     iconCode: iconCode ?? this.iconCode,
     isDouble: isDouble ?? this.isDouble,
+    order: order ?? this.order,
   );
 
   @override

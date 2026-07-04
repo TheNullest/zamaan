@@ -47,6 +47,7 @@ class ScheduledIntervalEntity extends BaseOwnedEntity {
     this.consecutiveOccurrences = 1,
     super.description,
     super.updatedAt,
+    super.order,
   });
 
   /// Named constructor for creating a new entity.
@@ -62,6 +63,7 @@ class ScheduledIntervalEntity extends BaseOwnedEntity {
     required this.startDate,
     this.consecutiveOccurrences = 1,
     super.description,
+    super.order,
   }) : super.create();
 
   /// Named constructor for updating an existing entity.
@@ -80,6 +82,7 @@ class ScheduledIntervalEntity extends BaseOwnedEntity {
     required this.startDate,
     this.consecutiveOccurrences = 1,
     super.description,
+    super.order,
   }) : super.update();
 
   //========================
@@ -99,6 +102,7 @@ class ScheduledIntervalEntity extends BaseOwnedEntity {
     required DateTime startDate,
     int consecutiveOccurrences = 1,
     String? description,
+    int? order,
   }) => ScheduledIntervalEntity.create(
     userId: userId,
     taskId: taskId,
@@ -109,6 +113,7 @@ class ScheduledIntervalEntity extends BaseOwnedEntity {
     startDate: startDate,
     consecutiveOccurrences: consecutiveOccurrences,
     description: description,
+    order: order,
   );
 
   /// Factory to create an updated ScheduledIntervalEntity from input data.
@@ -124,6 +129,7 @@ class ScheduledIntervalEntity extends BaseOwnedEntity {
     required DateTime startDate,
     int consecutiveOccurrences = 1,
     String? description,
+    int? order,
   }) => ScheduledIntervalEntity.update(
     id: id,
     userId: userId,
@@ -136,6 +142,7 @@ class ScheduledIntervalEntity extends BaseOwnedEntity {
     startDate: startDate,
     consecutiveOccurrences: consecutiveOccurrences,
     description: description,
+    order: order,
   );
 
   /// The ID of the schedule constraint to which this interval configuration belongs.
@@ -180,6 +187,7 @@ class ScheduledIntervalEntity extends BaseOwnedEntity {
     int? consecutiveOccurrences,
     int? repeatCount,
     List<String>? scheduledTimeIds,
+    int? order,
   }) {
     return ScheduledIntervalEntity(
       id: id ?? this.id,
@@ -195,6 +203,7 @@ class ScheduledIntervalEntity extends BaseOwnedEntity {
       startDate: startDate ?? this.startDate,
       scheduledTimeIds:
           scheduledTimeIds ?? List.from(this.scheduledTimeIds), // Creates a new list instance.
+      order: order ?? this.order,
     );
   }
 

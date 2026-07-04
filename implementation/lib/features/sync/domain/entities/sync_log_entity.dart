@@ -1,8 +1,6 @@
-import 'package:hive_ce_flutter/hive_flutter.dart';
-import 'package:zamaan/core/base/base_owned_entity.dart';
+import 'package:zamaan/shared/domain/entities/base_owned_entity.dart';
 
 /// Represents a synchronization log entry for tracking device sync operations.
-@HiveType(typeId: 31)
 class SyncLogEntity extends BaseOwnedEntity {
   SyncLogEntity({
     required super.id,
@@ -15,19 +13,15 @@ class SyncLogEntity extends BaseOwnedEntity {
   });
 
   /// Identifier for the device associated with the synchronization operation.
-  @HiveField(11)
   final String deviceId;
 
   /// Identifier linking this sync status to a specific LogEntity (Event).
-  @HiveField(12)
   final String logEntityId;
 
   /// Indicates whether the synchronization has been completed.
-  @HiveField(13)
   final bool isSynced;
 
   /// Timestamp indicating when the synchronization was successfully completed.
-  @HiveField(14)
   final DateTime? syncedAt;
 
   SyncLogEntity copyWith({

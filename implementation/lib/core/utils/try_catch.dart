@@ -9,7 +9,7 @@
 // import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
 // import 'package:zamaan/core/errors/exceptions/unexpected_exception.dart';
 // import 'package:zamaan/core/utils/typedef.dart';
-// import 'package:zamaan/domain/enums/failure_type.dart';
+// import 'package:zamaan/shared/domain/enums/failure_type.dart';
 
 /// Executes the given [action] and catches any exceptions that occur,
 /// converting them into a [Failure] or a custom exception.

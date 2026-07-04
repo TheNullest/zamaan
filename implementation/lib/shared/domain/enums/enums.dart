@@ -7,6 +7,7 @@ export 'hive/occurrence_status.dart';
 export 'hive/os.dart';
 export 'hive/priority.dart';
 export 'hive/reference_type.dart';
+export 'hive/registration_status.dart';
 export 'hive/repetition_type.dart';
 export 'hive/schedule_type.dart';
 export 'hive/scheduled_time_mode.dart';
@@ -29,7 +30,4 @@ enum ButtonStates {
   dropped,
 }
 
-enum TaskTileSizes {
-  big,
-  small,
-}
+enum TaskTileSizes { big, small }
