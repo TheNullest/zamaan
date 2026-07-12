@@ -65,6 +65,7 @@ class HiveInitializer {
     Hive.registerAdapter(OSAdapter());
     Hive.registerAdapter(PriorityAdapter());
     Hive.registerAdapter(ReferenceTypeAdapter());
+    Hive.registerAdapter(RegistrationStatusAdapter());
     Hive.registerAdapter(RepetitionTypeAdapter());
     Hive.registerAdapter(ScheduleTypeAdapter());
     Hive.registerAdapter(SyncActionAdapter());
