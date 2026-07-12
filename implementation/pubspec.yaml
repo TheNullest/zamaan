@@ -44,6 +44,7 @@ dependencies:
   stack_trace: ^1.12.1
   meta: ^1.18.0
   path_provider: ^2.1.5
+  go_router: any
 
 dev_dependencies:
   flutter_test:
