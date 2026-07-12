@@ -71,6 +71,7 @@ import 'package:zamaan/features/auth/data/datasources/auth_user_hive_local_data_
 import 'package:zamaan/features/auth/data/datasources/auth_user_local_data_source.dart';
 import 'package:zamaan/features/auth/domain/repositories/user_repository.dart';
 import 'package:zamaan/features/auth/data/repositories/user_repository_impl.dart';
+import 'package:zamaan/features/auth/presentation/viewmodels/auth_bootstrap_viewmodel.dart';
 import 'package:zamaan/features/auth/domain/usecases/user/create_local_user_use_case.dart';
 import 'package:zamaan/features/auth/domain/usecases/user/get_current_user_use_case.dart';
 import 'package:zamaan/features/auth/domain/usecases/user/mark_user_as_registered_use_case.dart';
@@ -113,6 +114,8 @@ import 'package:zamaan/shared/data/models/local/user/user_hive_model.dart';
 import 'package:zamaan/shared/data/repositories/current_user_provider_impl.dart';
 import 'package:zamaan/shared/domain/repositories/current_user_provider.dart';
 
+import 'package:zamaan/features/task_center/presentation/viewmodels/task_list_viewmodel.dart';
+
 part 'hive/init_hive_boxes.dart';
 part 'hive/init_hive_data_sources.dart';
 part 'init_dependencies.main.dart';
@@ -120,3 +123,4 @@ part 'init_mappers.dart';
 part 'init_user_provider.dart';
 part 'init_use_cases.dart';
 part 'init_repositories.dart';
+part 'init_presentation.dart';

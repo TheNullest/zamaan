@@ -19,4 +19,7 @@ Future<void> init() async {
 
   // 6. Register repositories (depend on data sources, mappers, current user)
   initRepositories();
+
+  // 7. Register presentation layer (viewmodels/controllers)
+  initPresentation();
 }
