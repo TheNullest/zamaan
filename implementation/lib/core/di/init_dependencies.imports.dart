@@ -113,6 +113,7 @@ import 'package:zamaan/shared/data/mappers/user_mapper.dart';
 import 'package:zamaan/shared/data/models/local/user/user_hive_model.dart';
 import 'package:zamaan/shared/data/repositories/current_user_provider_impl.dart';
 import 'package:zamaan/shared/domain/repositories/current_user_provider.dart';
+import 'package:zamaan/core/services/hive/hive_initializer.dart';
 
 import 'package:zamaan/features/task_center/presentation/viewmodels/task_list_viewmodel.dart';
 
