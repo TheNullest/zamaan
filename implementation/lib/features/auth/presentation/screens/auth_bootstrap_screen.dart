@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../viewmodels/auth_bootstrap_viewmodel.dart';
 
 class AuthBootstrapScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _AuthBootstrapScreenState extends State<AuthBootstrapScreen> {
     final success = await _viewModel.createLocalUser(displayName: name, email: email);
     if (success) {
       if (!mounted) return;
-      Navigator.of(context).pushReplacementNamed('/tasks');
+      context.go('/tasks');
     } else {
       final msg = _viewModel.error ?? 'Failed to create user';
       if (!mounted) return;
